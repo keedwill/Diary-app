@@ -1,0 +1,60 @@
+<h3>Add Story</h3>
+<div class="row">
+    <form action="/stories" method="POST" class="col s12" enctype="multipart/form-data">
+        <div class="row">
+            {{#if message}}
+            <div class="toast red mb-2" role="alert" id="alert">
+                <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{message.vmessage}}</p>
+            </div>
+            {{/if}}
+             {{#if multermessage}}
+            <div class="toast red mb-2" role="alert" id="alert">
+                <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{multermessage.vmessage}}</p>
+            </div>
+            {{/if}}
+            <div class="input-field">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select name="status" id="status">
+                    <option value="private" selected>Private</option>
+                    <option value="public">Public</option>
+                </select>
+                <label for="status">Status</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>How do you feel today {{name}}</h5>
+
+                <textarea name="body" id="body" cols="30" rows="10"></textarea>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>image</span>
+                    <input name="image" type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/dashboard" class="btn orange">Cancel</a>
+        </div>
+
+    </form>
+</div>
+

@@ -1,0 +1,56 @@
+<h6>dashboard</h6>
+
+<div class="col ">
+    <h3>Welcome {{user.name}}</h3>
+
+    <div>
+        <img class="circle responsive-img img-small" src="{{user.image}}" alt="" srcset="">
+    </div>
+
+</div>
+<p>Here are your stories</p>
+
+{{#if stories}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    {{#each stories}}
+    <tbody>
+        <td><a href="/stories/{{_id}}">{{title}}</a></td>
+        <td>{{ formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+        <td><span class="dash-status">{{status}}</span></td>
+        <td><a href="/stories/{{_id}}" class="btn ">Read More</a></td>
+        <td><a class="btn " href="/stories/edit/{{_id}}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+        
+        <td><form action="/stories/{{_id}}" id="delete-form" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn red"><i class="fas fa-trash"></i></button>
+        </form>
+        </td>
+    </tbody>
+    {{/each}}
+</table>
+{{#unless user}}
+{{else}}
+    {{>_alert message=message}}
+
+{{/unless}}
+
+{{else}}
+<p>You have not created any stories for today <span id="today"></span> </p>
+{{/if}}
+{{>_add}}
+<script>
+    let today = new Date();
+    let dd = today.getDate();
+
+    let mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    format = `${dd}-${mm}-${yyyy}`;
+    today = document.getElementById('today').innerHTML = format
+</script>
